@@ -1,0 +1,67 @@
+.catalog:
+  name: Gitlab Community
+  version: '1'
+  description: |
+    Gitlab CE is a free GitHub alternative
+  minimum_rancher_version: v0.56.0
+  maintainer: "John Moscato <jmoscato@gmail.com>"
+  uuid: gitlab-0
+  questions:
+    - variable: "gitlab_hostname"
+      description: "Gitlab hostname (without uri scheme http:// or https://)"
+      label: "Hostname:"
+      required: true
+      default: "git.example.com"
+      type: "string"
+    - variable: "gitlab_external_url"
+      label: "Gitlab external url:"
+      description: |
+        External url including scheme and port
+      default: 'http://git.example.com:80'
+      required: true
+      type: "string"
+    - variable: "gitlab_omnibus_extras"
+      label: "Gitlab omnibus config extra items:"
+      description: |
+        Additional items for GITLAB_OMNIBUS_CONFIG variable
+      required: false
+      type: "multiline"
+    - variable: "http_port"
+      description: "HTTP port to expose on host. Will be used to bind TCP"
+      label: "HTTP port:"
+      required: true
+      default: 80
+      type: "string"
+    - variable: "https_port"
+      description: "HTTPS port to expose on host. Will be used to bind TCP"
+      label: "HTTPS port:"
+      required: true
+      default: 443
+      type: "string"
+    - variable: "ssh_port"
+      description: "SSH port to expose on host. Will be used to bind TCP"
+      label: "SSH port:"
+      required: true
+      default: 22
+      type: "string"
+    - variable: "gitlab_volume_base"
+      description: "Gitlab storage base path (without trailing slash /)"
+      label: "Storage path:"
+      required: true
+      default: "/opt/gitlab/server"
+      type: "string"
+
+gitlab-server:
+  scale: 1
+  retain_ip: true
+  health_check:
+    port: 80
+    interval: 30000
+    unhealthy_threshold: 3
+    strategy: recreate
+    response_timeout: 2000
+    healthy_threshold: 2
+
+gitlab-data:
+  scale: 1
+  retain_ip: true
