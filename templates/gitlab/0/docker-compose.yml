@@ -11,7 +11,7 @@ gitlab-server:
     - gitlab-data
   environment:
     GITLAB_OMNIBUS_CONFIG: |
-      external_url '${gitlab_omnipus_prefix}${gitlab_hostname}'
+      external_url '${gitlab_omnibus_prefix}${gitlab_hostname}'
 
 gitlab-data:
   labels:
