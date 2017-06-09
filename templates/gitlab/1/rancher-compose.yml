@@ -13,14 +13,16 @@
       required: true
       default: "git.example.com"
       type: "string"
-    - variable: "gitlab_external_url"
-      label: "Gitlab external url:"
+    - variable: "gitlab_url_scheme"
+      label: "Gitlab url scheme:"
       description: |
-        External url including scheme and port
-      default: 'http://git.example.com:80'
+        Currently only http is supported
+      default: 'http://'
       required: true
       type: "string"
-    - variable: "gitlab_omnibus_extras"
+      options:
+        - 'http://'
+    - variable: "gitlab_omnibus_config_extras"
       label: "Gitlab omnibus config extra items:"
       description: |
         Additional items for GITLAB_OMNIBUS_CONFIG variable
@@ -31,12 +33,6 @@
       label: "HTTP port:"
       required: true
       default: 80
-      type: "string"
-    - variable: "https_port"
-      description: "HTTPS port to expose on host. Will be used to bind TCP"
-      label: "HTTPS port:"
-      required: true
-      default: 443
       type: "string"
     - variable: "ssh_port"
       description: "SSH port to expose on host. Will be used to bind TCP"
